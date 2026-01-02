@@ -112,7 +112,7 @@ export default function HubungiKami() {
           </div>
 
           {/* FORM */}
-          <div className="w-full overflow-hidden">
+          <div className="w-full">
             <FormHubungiKami />
           </div>
         </div>

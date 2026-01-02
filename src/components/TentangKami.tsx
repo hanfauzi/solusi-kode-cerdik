@@ -3,9 +3,9 @@ import Image from "next/image";
 const TentangKami = () => {
   return (
     <section id="tentang" className="bg-white py-16 md:py-24">
-      <div className="container mx-auto px-4 lg:px-0">
+      <div className="container mx-auto px-4 md:px-0">
         {/* ================= MOBILE LAYOUT ================= */}
-        <div className="lg:hidden flex flex-col items-center text-center gap-8">
+        <div className="xl:hidden flex flex-col items-center text-center gap-8">
           {/* IMAGE */}
           <div className="w-screen h-full">
             <Image
@@ -68,7 +68,7 @@ const TentangKami = () => {
         </div>
 
         {/* ================= DESKTOP LAYOUT ================= */}
-        <div className="hidden lg:flex flex-row items-center gap-20">
+        <div className="hidden xl:flex flex-row items-center gap-20">
           {/* IMAGE */}
           <div className="w-1/2 relative">
             <Image

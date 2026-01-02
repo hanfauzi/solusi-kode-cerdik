@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     icon: "/assets/logo/logo.svg",
     shortcut: "/assets/logo/logo.svg",
   },
+
 };
 
 export default function RootLayout({

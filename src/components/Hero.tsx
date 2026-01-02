@@ -13,8 +13,7 @@ const Hero = () => {
             <h1 className="font-extrabold text-[32px] leading-tight text-[#027DDC]">
               Solusi Pembayaran <br />
               PPOB Terpercaya <br />
-              untuk Kebutuhan Bisnis <br />
-              Anda
+              untuk Kebutuhan Bisnis Anda
             </h1>
 
             <p className="text-[12px] text-[#1E293A] leading-relaxed px-2">

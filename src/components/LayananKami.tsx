@@ -1,0 +1,170 @@
+"use client";
+
+import Image from "next/image";
+import { useRef, useState } from "react";
+
+const LayananKami = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+
+  const layanan = [
+    {
+      icon: "/assets/layanan/listrik-air.svg",
+      title: "Tagihan Listrik & Air",
+      description:
+        "Pembayaran tagihan listrik dan air secara real-time dengan proses cepat dan akurat untuk kebutuhan pelanggan harian.",
+    },
+    {
+      icon: "/assets/layanan/bpjs.svg",
+      title: "Jaminan Sosial & Kesehatan",
+      description:
+        "Layanan pembayaran BPJS dan jaminan sosial lainnya dengan sistem yang aman dan terverifikasi.",
+    },
+    {
+      icon: "/assets/layanan/telpon.svg",
+      title: "Internet & Telepon Rumah",
+      description:
+        "Pembayaran tagihan internet dan telepon rumah dari berbagai penyedia dalam satu platform terpadu.",
+    },
+    {
+      icon: "/assets/layanan/multifinance.svg",
+      title: "Multifinance",
+      description:
+        "Fasilitas pembayaran cicilan dan pembiayaan dari berbagai perusahaan multifinance secara praktis.",
+    },
+    {
+      icon: "/assets/layanan/pulsa.svg",
+      title: "Pulsa & Paket Data",
+      description:
+        "Pengisian pulsa dan paket data semua operator dengan proses instan dan ketersediaan lengkap.",
+    },
+    {
+      icon: "/assets/layanan/voucher game.svg",
+      title: "Voucher Game & Streaming",
+      description:
+        "Penyediaan voucher game dan layanan hiburan digital yang cepat, aman, dan siap jual.",
+    },
+  ];
+
+  const nextSlide = () =>
+    setCurrentSlide((prev) => (prev + 1) % layanan.length);
+
+  const prevSlide = () =>
+    setCurrentSlide((prev) => (prev - 1 + layanan.length) % layanan.length);
+
+  return (
+    <section
+      id="layanan"
+      className="relative py-16 md:py-24 overflow-hidden bg-white"
+    >
+      {/* Background Gradient */}
+      <div className="absolute inset-x-0 bottom-0 h-full bg-[linear-gradient(351.01deg,#5AEDC9_-8.58%,#027DDC_96.69%)]" />
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
+        <h2 className="text-center text-white text-2xl md:text-4xl font-bold mb-12">
+          Produk & Layanan PPOB
+        </h2>
+
+        <p className="text-center text-white text-lg md:text-lg mb-12">
+          Satu koneksi, ribuan produk digital. Buka aliran pendapatan baru
+          dengan katalog lengkap kami.
+        </p>
+
+        {/* ===== DESKTOP GRID ===== */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {layanan.map((item, index) => (
+            <div key={index} className="bg-white rounded-3xl p-8 shadow-lg">
+              <Image
+                src={item.icon}
+                alt={item.title}
+                width={120}
+                height={120}
+                className="w-24 h-24 mb-6"
+              />
+
+              <h3 className="text-xl font-bold text-[#0473BF] mb-3">
+                {item.title}
+              </h3>
+
+              <p className="text-[#06334C] text-sm leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* ===== MOBILE CAROUSEL ===== */}
+        <div className="md:hidden">
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-out touch-pan-y"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              onTouchStart={(e) => {
+                touchStartX.current = e.touches[0].clientX;
+              }}
+              onTouchEnd={(e) => {
+                if (touchStartX.current === null) return;
+                const diff = touchStartX.current - e.changedTouches[0].clientX;
+
+                if (Math.abs(diff) > 50) {
+                  if (diff > 0) {
+                    nextSlide();
+                  } else {
+                    prevSlide();
+                  }
+                }
+
+                touchStartX.current = null;
+              }}
+            >
+              {layanan.map((item, index) => (
+                <div
+                  key={index}
+                  className="w-full shrink-0 flex justify-center"
+                >
+                  <div className="w-[343px] h-[343px] flex items-center justify-center">
+                    <div className="w-[303px] h-[303px] bg-white rounded-[15px] p-5 shadow-lg flex flex-col gap-4">
+                      <Image
+                        src={item.icon}
+                        alt={item.title}
+                        width={120}
+                        height={120}
+                        className="w-24 h-24 mx-auto mb-6"
+                      />
+
+                      <h3 className="text-xl font-extrabold text-[#0473BF] text-center mb-3">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-sm text-[#06334C] text-center">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Indicator */}
+          <div className="flex justify-center gap-2 mt-8">
+            {layanan.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentSlide
+                    ? "w-8 bg-white"
+                    : "w-2 border-2 border-white"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default LayananKami;
